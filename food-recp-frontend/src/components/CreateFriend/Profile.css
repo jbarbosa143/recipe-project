@@ -1,0 +1,52 @@
+.update-container {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input-div {
+  margin: 10px;
+}
+
+.input-div input {
+  padding: 10px;
+  width: 100%;
+}
+
+.button-div button {
+  padding: 10px;
+  background-color: chocolate;
+  color: white;
+  width: 95%;
+}
+
+#friends {
+  width: 100%;
+}
+
+#friends thead tr th,
+#friends tbody tr td {
+  border: 1px solid #dddddd;
+  padding: 10px;
+}
+
+#friends #tr th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: purple;
+  color: white;
+}
+
+#friends tbody tr {
+  text-align: left;
+}
+
+#friends tbody tr:nth-child(even) {
+  background-color: #fb5757;
+}
+
+#friends tbody tr:hover {
+  background-color: #ddd;
+}
