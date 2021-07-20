@@ -23,7 +23,7 @@ export class Login extends Component {
     let isAuth = checkIfUserIsAuth();
 
     if (isAuth) {
-      this.props.history.push("/movie");
+      this.props.history.push("/recipe");
     }
   }
 

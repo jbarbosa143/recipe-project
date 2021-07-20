@@ -5,8 +5,10 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
-import Movie from "./components/Movie/Movie";
-import MovieDetail from "./components/Movie/MovieDetail";
+import Recipe from "./components/Recipe/Recipe"
+import RecipeDetail from "./components/Recipe/RecipeDetail";
+// import Movie from "./components/Movie/Movie";
+// import MovieDetail from "./components/Movie/MovieDetail";
 import Profile from "./components/Profile/Profile";
 import CreateFriend from "./components/CreateFriend/CreateFriend";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -18,7 +20,7 @@ const MainRouter = (props) => {
       <>
         {/* <Route exact path="/movie" component={Movie} /> */}
         <PrivateRoute exact path="/create-friend" component={CreateFriend} />
-        <PrivateRoute exact path="/movie" component={Movie} />
+        <PrivateRoute exact path="/recipe" component={Recipe} />
         <PrivateRoute
           exact
           path="/profile"
@@ -41,8 +43,8 @@ const MainRouter = (props) => {
         {/* <Route exact path="/movie-detail/:movieTitle" component={MovieDetail} /> */}
         <PrivateRoute
           exact
-          path="/movie-detail/:movieTitle"
-          component={MovieDetail}
+          path="/recipe-detail/:recipeName"
+          component={RecipeDetail}
         />
         <Route exact path="/" component={Home} />
       </>

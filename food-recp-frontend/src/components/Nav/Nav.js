@@ -9,15 +9,15 @@ export class Nav extends Component {
       <nav className="Navbar">
         <div className="h1-logo">
           <h1>
-            <Link to="/">Movie with friends!</Link>
+            <Link to="/">Cooking with friends!</Link>
           </h1>
         </div>
         <div className="right-side-nav">
           <ul>
             <li>
               {this.props.user ? (
-                <NavLink activeClassName="selected" to="/movie">
-                  Movie Search
+                <NavLink activeClassName="selected" to="/recipe">
+                  Recipes!!!!
                 </NavLink>
               ) : (
                 ""

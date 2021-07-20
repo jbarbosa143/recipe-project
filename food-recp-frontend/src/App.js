@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
 import jwtDecode from "jwt-decode";
-
 import MainRouter from "./MainRouter";
 import setAxiosAuthToken from "./components/utils/setAxiosAuthToken";
 
