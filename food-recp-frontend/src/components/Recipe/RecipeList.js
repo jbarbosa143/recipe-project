@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 function RecipeList(props) {
   return props.recipeArray.map((item) => {
+    console.log(item)
     return (
       <div
         key={item.image}
@@ -17,8 +19,11 @@ function RecipeList(props) {
             <img src={item.image} alt={item.title} />
           </div>
           <div>
-            Recipe: {item.title}
-            Servings: {item.servings}
+            <ul>
+              <li>Recipe: {item.title}</li>
+              <li>Servings: {item.servings} </li>
+            </ul>
+            
           </div>
         </Link>
       </div>

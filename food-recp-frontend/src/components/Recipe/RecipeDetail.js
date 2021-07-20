@@ -41,9 +41,11 @@ export class RecipeDetail extends Component {
   };
 
   fetchRecipe = async () => {
+    console.log('RecipeDetails:',this.props.match.params.recipeName)
     try {
+      
       let result = await axios.get(
-        `https://api.spoonacular.com/recipes/?${process.env.REACT_APP_COOKING_API}=${this.props.match.params.RecipeDetail}`
+        `https://api.spoonacular.com/recipes/${this.props.match.params.recipeName}/information&?apiKey=${process.env.REACT_APP_COOKING_API}`
       );
 
       this.setState(

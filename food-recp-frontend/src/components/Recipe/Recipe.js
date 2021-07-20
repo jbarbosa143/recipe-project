@@ -52,9 +52,13 @@ export class Recipe extends Component {
           pageArray: totalPageArray,
         });
       } else {
+        let results = await this.handleRandomRecipes();
+        this.setState({
+          recipeArray: results.data.recipes
+        });
         let randomRecipeName = this.handleRandomRecipe();
         let result = await this.handleSearchRecipe(randomRecipeName);
-
+        console.log('result:',result)
         let totalPageArray = this.getTotalPages(
           +result.data.totalResults,
           this.state.perPage
@@ -62,7 +66,7 @@ export class Recipe extends Component {
 
         this.setState({
           recipe: randomRecipeName,
-          RecipeArray: result.data.Search,
+          recipeArray2: result.data.Search,
           totalPage: +result.data.totalResults, 
           pageArray: totalPageArray, 
         });
@@ -72,13 +76,13 @@ export class Recipe extends Component {
 
   handleRandomRecipe = () => {
     let randomRecipeArray = [
-      "Big trouble in little china",
-      "the simpsons",
-      "Rush hour",
-      "the godfather",
-      "Luca",
-      "Pulp Fiction",
-      "The Matrix",
+      "Berry Banana Breakfast Smoothie",
+      "Homemade Garlic and Basil French Fries",
+      "Chicken Tortilla Soup (Slow Cooker)",
+      "Cauliflower, Brown Rice, and Vegetable Fried Ricer",
+      "Slow Cooker Beef Stew",
+      "Broccoli and Chickpea Rice Salad",
+      "Red Kidney Bean Jambalaya",
     ];
     let randomSelectedRecipeIndex = Math.floor(
       Math.random() * randomRecipeArray.length
@@ -88,12 +92,23 @@ export class Recipe extends Component {
 
   handleSearchRecipe = async (recipeName) => {
     try {
+      //https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
       let randomRecipeData = await axios.get(
-        `https://api.spoonacular.com/recipes?apiKey=${process.env.REACT_APP_COOKING_API}&s=${recipeName}&page=${this.state.currentPage}`
+        `https://api.spoonacular.com/recipes/complexSearch?&apiKey=${process.env.REACT_APP_COOKING_API}`
       );
 
       return randomRecipeData;
     } catch (e) {
+      return e;
+    }
+  };
+
+  handleRandomRecipes = async ()=>{
+    try{
+      let results = await axios.get(`https://api.spoonacular.com/recipes/random?number=10&tags=vegetarian,desert&apiKey=${process.env.REACT_APP_COOKING_API}`);
+      console.log(results)
+      return results;
+    }catch (e) {
       return e;
     }
   };
@@ -259,6 +274,7 @@ export class Recipe extends Component {
     };
 
     render() {
+      console.log(this.state.recipeArray)
     return (
         <div>
         <div
@@ -289,7 +305,7 @@ export class Recipe extends Component {
         >
           {/* {this.showMovieList()} */}
 
-            <h3>Coolest Movie</h3>
+            <h3>Recipes</h3>
             <RecipeList recipeArray={this.state.recipeArray} />
         </div>
 
