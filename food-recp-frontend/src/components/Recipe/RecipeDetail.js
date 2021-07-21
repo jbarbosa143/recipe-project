@@ -6,9 +6,7 @@ export class RecipeDetail extends Component {
   state = {
     title: "",
     dishTypes: "",
-    extendedIngredients: "",
-    readInMinutes: "",
-    spoontacularScore: "",
+    servings: "",
     aggregateLikes: [],
     image: "",
     isLoading: true,
@@ -52,12 +50,8 @@ export class RecipeDetail extends Component {
       this.setState(
         {
             aggregateLikes: result.data.aggregateLikes,
-            extendedIngredients: result.data.extendedIngredients,
             dishTypes: result.data.dishTypes,
-            readInMinutes: result.data.readInMinutes,
             servings: result.data.servings,
-            spoontacularScore: result.data.spoontacularScore,
-            Ratings: result.data.Ratings,
             title: result.data.title,
             image: result.data.image,
             isLoading: false,
@@ -82,11 +76,9 @@ export class RecipeDetail extends Component {
         </div>
         <div>
         <div>Serving Size: {this.state.servings}</div>  
-          <div>Ready in: {this.state.readInMinutes} Minutes</div>
           <div>Dish Type: {this.state.dishTypes}</div> 
           <div>Likes: {this.state.aggregateLikes}</div> 
-          <div>Rated: {this.state.spoontacularScore}</div> 
-          <div>Recipe/Prep: {this.state.extendedIngredients}</div>
+          
         </div>
       </div>
     );
