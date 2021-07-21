@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function RecipeList(props) {
   return props.recipeArray.map((item) => {
-    console.log(item)
+    // console.log('recipelist:',item.id)
     return (
       <div
         key={item.image}
@@ -11,7 +11,7 @@ function RecipeList(props) {
       >
         <Link
           to={{
-            pathname: `/recipe-detail/${item.title}`,
+            pathname: `/recipe-detail/${item.id}`,
             //search: `?t=${item.Title}`, //?minPrice=20&maxPrice=59&color=white&size=10
           }}
         >

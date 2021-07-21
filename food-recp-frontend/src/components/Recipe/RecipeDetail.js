@@ -41,11 +41,12 @@ export class RecipeDetail extends Component {
   };
 
   fetchRecipe = async () => {
-    console.log('RecipeDetails:',this.props.match.params.recipeName)
+    console.log('RecipeDetails:',this.props.match)
+    console.log('fetching id:',this.props.match.params.recipeName)
     try {
       
       let result = await axios.get(
-        `https://api.spoonacular.com/recipes/${this.props.match.params.recipeName}/information&?apiKey=${process.env.REACT_APP_COOKING_API}`
+        `https://api.spoonacular.com/recipes/${this.props.match.params.recipeName}/information?apiKey=${process.env.REACT_APP_COOKING_API}`
       );
 
       this.setState(
@@ -73,6 +74,7 @@ export class RecipeDetail extends Component {
   };
 
   showRecipeDetail = () => {
+    console.log('thisState:',this.state)
     return (
       <div style={{ display: "flex" }}>
         <div>
@@ -81,19 +83,9 @@ export class RecipeDetail extends Component {
         <div>
         <div>Serving Size: {this.state.servings}</div>  
           <div>Ready in: {this.state.readInMinutes} Minutes</div>
-          <div>Dish Type: {this.state.dishTypes}</div>
-          <div>Likes: {this.state.aggregateLikes}</div>
-          <div>Rated: {this.state.spoontacularScore}</div>
-          <div>
-            Ratings:{" "}
-            {this.state.Ratings.map((item) => {
-              return (
-                <span key={item.Source}>
-                  {item.Source} {item.Value}
-                </span>
-              );
-            })}
-          </div>
+          <div>Dish Type: {this.state.dishTypes}</div> 
+          <div>Likes: {this.state.aggregateLikes}</div> 
+          <div>Rated: {this.state.spoontacularScore}</div> 
           <div>Recipe/Prep: {this.state.extendedIngredients}</div>
         </div>
       </div>
@@ -133,7 +125,7 @@ export class RecipeDetail extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         {this.state.isLoading ? (

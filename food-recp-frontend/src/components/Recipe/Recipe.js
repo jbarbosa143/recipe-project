@@ -58,7 +58,7 @@ export class Recipe extends Component {
         });
         let randomRecipeName = this.handleRandomRecipe();
         let result = await this.handleSearchRecipe(randomRecipeName);
-        console.log('result:',result)
+        // console.log('result:',result)
         let totalPageArray = this.getTotalPages(
           +result.data.totalResults,
           this.state.perPage
@@ -90,7 +90,7 @@ export class Recipe extends Component {
     return randomRecipeArray[randomSelectedRecipeIndex];
   };
 
-  handleSearchRecipe = async (recipeName) => {
+  handleSearchRecipe = async () => {
     try {
       //https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
       let randomRecipeData = await axios.get(
@@ -106,7 +106,7 @@ export class Recipe extends Component {
   handleRandomRecipes = async ()=>{
     try{
       let results = await axios.get(`https://api.spoonacular.com/recipes/random?number=10&tags=vegetarian,desert&apiKey=${process.env.REACT_APP_COOKING_API}`);
-      console.log(results)
+      // console.log(results)
       return results;
     }catch (e) {
       return e;
@@ -274,7 +274,7 @@ export class Recipe extends Component {
     };
 
     render() {
-      console.log(this.state.recipeArray)
+      // console.log(this.state.recipeArray)
     return (
         <div>
         <div
@@ -307,6 +307,7 @@ export class Recipe extends Component {
 
             <h3>Recipes</h3>
             <RecipeList recipeArray={this.state.recipeArray} />
+            
         </div>
 
         {this.state.totalPage <= 10 ? (
