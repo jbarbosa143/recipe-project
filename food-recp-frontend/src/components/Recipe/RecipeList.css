@@ -1,0 +1,16 @@
+*{
+    /* outline: solid black 1px; */
+    margin:0px;
+    padding: 0px;
+}
+
+.foods ul{
+    padding:0px;
+}
+
+.foods ul li{
+    display: flex;
+    width:100px;
+    text-align: left;
+    vertical-align: middle;
+}

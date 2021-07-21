@@ -1,0 +1,23 @@
+*{
+    /* outline: solid black 1px; */
+    padding:0px;
+}
+.container{
+    background-image: url('https://media.giphy.com/media/ftdB6XY9fSYdxBTm3w/giphy.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.header p{
+    color: blue;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 26px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}

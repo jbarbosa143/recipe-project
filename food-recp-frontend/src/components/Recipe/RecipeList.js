@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./RecipeList.css";
 
 function RecipeList(props) {
   console.log(props)
   return props.recipeArray.map((item) => {
     console.log('recipelist:',item.id)
     return (
-      <div
+      <div className="foods"
         key={item.image}
-        style={{ width: 100, height: 100, marginRight: 25, marginBottom: 100 }}
+        style={{ width: 100, height: 100, marginRight: 10, marginBottom: 100 }}
       >
         <Link
           to={{
@@ -21,8 +22,9 @@ function RecipeList(props) {
           </div>
           <div>
             <ul>
-              <li>Recipe: {item.title}</li>
-              <li>Servings: {item.servings} </li>
+              <li>Recipe: {item.title} </li>
+              {/* <hr></hr> */}
+              <li>Servings: {item.servings}  </li>
             </ul>
             
           </div>

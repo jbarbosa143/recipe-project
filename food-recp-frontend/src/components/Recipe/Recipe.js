@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./Recipe.css";
+import "./RecipeList.css";
 
 import RecipeList from "./RecipeList";
 
@@ -108,7 +110,7 @@ export class Recipe extends Component {
 
   handleRandomRecipes = async ()=>{
     try{
-      let results = await axios.get(`https://api.spoonacular.com/recipes/random?number=10&tags=vegetarian,desert&apiKey=${process.env.REACT_APP_COOKING_API}`);
+      let results = await axios.get(`https://api.spoonacular.com/recipes/random?number=14&tags=vegetarian,desert&apiKey=${process.env.REACT_APP_COOKING_API}`);
       // console.log(results)
       return results;
     }catch (e) {
@@ -280,13 +282,15 @@ export class Recipe extends Component {
     render() {
       console.log(this.state.recipeArray)
     return (
-        <div>
-        <div
+    
+        <div className="container">
+          
+        <div className="itemContainer"
             style={{
             width: 500,
             margin: "0 auto",
             textAlign: "center",
-            marginTop: "50px",
+            marginTop: "20px",
             }}
         >
             <input
@@ -297,19 +301,23 @@ export class Recipe extends Component {
             />
             <button onClick={this.onSubmit}>Search</button>
         </div>
-
-        <div
+            <div className="header">
+              <p>Recipes</p>
+            </div>
+          
+        <div className="items"
             style={{
-            width: 1200,
+            width: 850,
+            height: 475,
             margin: "0 auto",
             textAlign: "center",
-            marginTop: "50px",
+            marginTop: "20px",
             display: "flex",
             }}
         >
           {/* {this.showMovieList()} */}
 
-            <h3>Recipes</h3>
+            
             <RecipeList recipeArray={this.state.recipeArray} />
             
         </div>
@@ -328,7 +336,7 @@ export class Recipe extends Component {
                 marginTop: 50,
             }}
             >
-            <button
+            {/* <button
                 disabled={this.state.currentPage === 1 ? true : false}
                 onClick={this.prevPage}
             >
@@ -347,7 +355,7 @@ export class Recipe extends Component {
                 onClick={this.nextPage}
             >
                 Next
-            </button>
+            </button> */}
             </div>
         )}
 
