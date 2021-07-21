@@ -7,6 +7,7 @@ import RecipeList from "./RecipeList";
 export class Recipe extends Component {
   state = {
     recipe: "",
+    meal:"",
     recipeArray: [],
     recipeArray2: [],
     recipeArray3: [],
@@ -34,7 +35,7 @@ export class Recipe extends Component {
       //check for session storage
       let searchedRecipeNameSessionStorage =
         window.sessionStorage.getItem("searchedRecipeName");
-
+      console.log('sessionstorage:',searchedRecipeNameSessionStorage)
       if (searchedRecipeNameSessionStorage) {
         let result = await this.handleSearchRecipe(
           searchedRecipeNameSessionStorage
@@ -47,29 +48,31 @@ export class Recipe extends Component {
 
         this.setState({
           recipe: searchedRecipeNameSessionStorage,
-          recipeArray: result.data.Search,
+          recipeArray: result.data.results,
           totalPage: +result.data.totalResults, 
           pageArray: totalPageArray,
         });
       } else {
+        console.log(55)
         let results = await this.handleRandomRecipes();
+        console.log(results)
         this.setState({
           recipeArray: results.data.recipes
         });
-        let randomRecipeName = this.handleRandomRecipe();
-        let result = await this.handleSearchRecipe(randomRecipeName);
-        console.log('result:',result)
-        let totalPageArray = this.getTotalPages(
-          +result.data.totalResults,
-          this.state.perPage
-        );
+        // let randomRecipeName = this.handleRandomRecipe();
+        // let result = await this.handleSearchRecipe(randomRecipeName);
+        // console.log('result:',result)
+        // let totalPageArray = this.getTotalPages(
+        //   +result.data.totalResults,
+        //   this.state.perPage
+        // );
 
-        this.setState({
-          recipe: randomRecipeName,
-          recipeArray2: result.data.Search,
-          totalPage: +result.data.totalResults, 
-          pageArray: totalPageArray, 
-        });
+        // this.setState({
+        //   recipe: randomRecipeName,
+        //   recipeArray2: result.data.Search,
+        //   totalPage: +result.data.totalResults, 
+        //   pageArray: totalPageArray, 
+        // });
       }
     } catch (e) {}
   }
@@ -90,14 +93,14 @@ export class Recipe extends Component {
     return randomRecipeArray[randomSelectedRecipeIndex];
   };
 
-  handleSearchRecipe = async () => {
+  handleSearchRecipe = async (title) => {
     try {
       //https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
-      let randomRecipeData = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?&apiKey=${process.env.REACT_APP_COOKING_API}`
+      let result = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${title}&apiKey=${process.env.REACT_APP_COOKING_API}`
       );
-
-      return randomRecipeData;
+        console.log(result)
+      return result;
     } catch (e) {
       return e;
     }
@@ -106,7 +109,7 @@ export class Recipe extends Component {
   handleRandomRecipes = async ()=>{
     try{
       let results = await axios.get(`https://api.spoonacular.com/recipes/random?number=10&tags=vegetarian,desert&apiKey=${process.env.REACT_APP_COOKING_API}`);
-      console.log(results)
+      // console.log(results)
       return results;
     }catch (e) {
       return e;
@@ -115,15 +118,16 @@ export class Recipe extends Component {
 
   handleOnChange = (event) => {
     this.setState({
-      recipe: event.target.value,
+      meal: event.target.value,
     });
   };
 
   onSubmit = async (event) => {
     try {
-      let result = await this.handleSearchRecipe(this.state.recipe);
+      console.log('this meal:',this.state.meal)
+      let result = await this.handleSearchRecipe(this.state.meal);
 
-      window.sessionStorage.setItem("searchedRecipeName", this.state.recipe);
+      window.sessionStorage.setItem("searchedRecipeName", this.state.meal);
 
       let totalPageArray = this.getTotalPages(
         +result.data.totalResults,
@@ -133,7 +137,7 @@ export class Recipe extends Component {
       console.log(result);
 
       this.setState({
-        recipeArray: result.data.Search,
+        recipeArray: result.data.results,
         totalPage: +result.data.totalResults,
         pageArray: totalPageArray,
       });
@@ -288,7 +292,7 @@ export class Recipe extends Component {
             <input
             type="text"
             placeholder="Search something..."
-            name="movie"
+            name="meal"
             onChange={this.handleOnChange}
             />
             <button onClick={this.onSubmit}>Search</button>
