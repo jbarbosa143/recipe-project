@@ -1,0 +1,43 @@
+*{
+    margin: center;
+    padding: 0px;
+    /* outline: solid black 1px; */
+}
+
+.detailContainer{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: #e6e6e6;
+    /* background-image: url('https://1.bp.blogspot.com/-mpeg70Sdwx4/TeYT8_PbAvI/AAAAAAAAAUk/46pvWthrzLE/s1600/prepare+food.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+}
+
+.detailCon{
+    background-image: url('https://1.bp.blogspot.com/-mpeg70Sdwx4/TeYT8_PbAvI/AAAAAAAAAUk/https://tenor.com/view/gordon-ramsay-chef-its-raw-hells-kitchen-the-flavors-are-https://tenor.com/bbXqe.gif://tenor.com/bbXqe.gif-gif-15204016/s1600/prepare+food.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.ingedentContain{
+    height:480px;
+    background-image: url('https://www.clker.com/cliparts/V/G/k/D/0/U/notebook-paper-hi.png');
+    overflow-y: scroll;
+}
+
+.ingrediantsItems ul{
+    margin-left: 20px;
+    padding: 0px;
+}
+
+.ingrediantsItems li{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    
+}

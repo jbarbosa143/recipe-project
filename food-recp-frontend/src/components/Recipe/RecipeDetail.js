@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Axios from "../utils/Axios";
+import "./RecipeDetails.css";
 
 export class RecipeDetail extends Component {
   state = {
@@ -8,6 +9,7 @@ export class RecipeDetail extends Component {
     dishTypes: "",
     servings: "",
     aggregateLikes: [],
+    extendedIngredients:"",
     image: "",
     isLoading: true,
     telInput: "",
@@ -39,8 +41,8 @@ export class RecipeDetail extends Component {
   };
 
   fetchRecipe = async () => {
-    console.log('RecipeDetails:',this.props.match)
-    console.log('fetching id:',this.props.match.params.recipeName)
+    // console.log('RecipeDetails:',this.props.match)
+    // console.log('fetching id:',this.props.match.params.recipeName)
     try {
       
       let result = await axios.get(
@@ -50,6 +52,7 @@ export class RecipeDetail extends Component {
       this.setState(
         {
             aggregateLikes: result.data.aggregateLikes,
+            ingredients: result.data.extendedIngredients,
             dishTypes: result.data.dishTypes,
             servings: result.data.servings,
             title: result.data.title,
@@ -58,7 +61,8 @@ export class RecipeDetail extends Component {
         },
         () => {
           this.setState({
-            friendMessage: `I think this Dish is delicious. ${this.state.title}`,
+            
+            friendMessage: `Hey !! I think this ${this.state.title}Dish is delicious. If this Dish looks good to you give it a try!` 
           });
         }
       );
@@ -68,16 +72,30 @@ export class RecipeDetail extends Component {
   };
 
   showRecipeDetail = () => {
-    console.log('thisState:',this.state)
+    // console.log('thisState:',this.state.dishTypes)
+    // console.log('Ingrediants:',this.state.ingredients)
     return (
-      <div style={{ display: "flex" }}>
-        <div>
+      <div  style={{ display: "flex", height:'auto', width:'auto' }}>
+        <div style={{height:'auto', width:'auto'}}>
           <img src={this.state.image} alt={this.state.title} />
         </div>
-        <div>
+        <div className='ingedentContain'>
         <div>Serving Size: {this.state.servings}</div>  
-          <div>Dish Type: {this.state.dishTypes}</div> 
+          <div>Dish Type: {this.state.dishTypes + ","}</div> 
           <div>Likes: {this.state.aggregateLikes}</div> 
+          <div><p>Ingredients/Recipe: </p>{this.state.ingredients.map((item)=>{
+            // console.log(item)
+            return (
+              <div className='items'>
+                <ul className="ingrediantsItems">
+                  <li>*{item.nameClean} - </li>
+                  <ul>
+                    <li>{item.original}</li>
+                  </ul>
+                </ul>
+              </div>
+            )
+          })}</div>
           
         </div>
       </div>
@@ -112,14 +130,14 @@ export class RecipeDetail extends Component {
       selectedFriendLastName: selectedUser.lastName,
       selectedFriendID: selectedUser._id,
       selectedFriendMobileNumber: selectedUser.mobileNumber,
-      friendMessage: `Hey ${selectedUser.firstName}, ${this.state.originalMessage}`,
+      friendMessage: `Hey ${selectedUser.firstName}, ${this.state.friendMessage}`,
     });
   };
 
   render() {
     // console.log(this.state);
     return (
-      <div>
+      <div className="detailContainer">
         {this.state.isLoading ? (
           <div style={{ textAlign: "center", marginTop: "50px" }}>
             ...Loading
@@ -128,18 +146,18 @@ export class RecipeDetail extends Component {
           <div>
             {this.showRecipeDetail()}
 
-            <div style={{ width: 250, margin: "0 auto", textAlign: "center" }}>
+            <div className='detailCon' style={{ width: 250, margin: "0 auto", textAlign: "center" }}>
               <select onChange={this.handleSelectChange}>
                 <option>Select a friend</option>
                 {this.state.friendsArray.map((friend) => {
                   return (
                     <option key={friend._id} value={JSON.stringify(friend)}>
-                      {friend.firstName} {friend.lastName}
+                      {friend.firstName},{friend.lastName}
                     </option>
                   );
                 })}
-              </select>
-              <textarea
+              </select >
+              <textarea style={{ width: 250, height:200,margin: "0 auto", textAlign: "center" }}
                 col="50"
                 rows="20"
                 defaultValue={this.state.friendMessage}

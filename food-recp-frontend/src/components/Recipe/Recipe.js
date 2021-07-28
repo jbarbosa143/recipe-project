@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Recipe.css";
 import "./RecipeList.css";
-
 import RecipeList from "./RecipeList";
 
 export class Recipe extends Component {
