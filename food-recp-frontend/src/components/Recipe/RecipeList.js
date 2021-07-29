@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./RecipeList.css";
 
 function RecipeList(props) {
-  console.log(props)
+  // console.log(props)
   return props.recipeArray.map((item) => {
-    console.log('recipelist:',item.id)
+    // console.log('recipelist:',item.id)
     return (
       <div className="foods"
         key={item.image}

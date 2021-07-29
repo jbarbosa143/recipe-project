@@ -36,7 +36,7 @@ export class Recipe extends Component {
       //check for session storage
       let searchedRecipeNameSessionStorage =
         window.sessionStorage.getItem("searchedRecipeName");
-      console.log('sessionstorage:',searchedRecipeNameSessionStorage)
+      // console.log('sessionstorage:',searchedRecipeNameSessionStorage)
       if (searchedRecipeNameSessionStorage) {
         let result = await this.handleSearchRecipe(
           searchedRecipeNameSessionStorage
@@ -54,9 +54,9 @@ export class Recipe extends Component {
           pageArray: totalPageArray,
         });
       } else {
-        console.log(55)
+        // console.log(55)
         let results = await this.handleRandomRecipes();
-        console.log(results)
+        // console.log(results)
         this.setState({
           recipeArray: results.data.recipes
         });
@@ -100,7 +100,7 @@ export class Recipe extends Component {
       let result = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${title}&apiKey=${process.env.REACT_APP_COOKING_API}`
       );
-        console.log(result)
+        // console.log(result)
       return result;
     } catch (e) {
       return e;
@@ -125,7 +125,7 @@ export class Recipe extends Component {
 
   onSubmit = async (event) => {
     try {
-      console.log('this meal:',this.state.meal)
+      // console.log('this meal:',this.state.meal)
       let result = await this.handleSearchRecipe(this.state.meal);
 
       window.sessionStorage.setItem("searchedRecipeName", this.state.meal);
@@ -279,7 +279,7 @@ export class Recipe extends Component {
     };
 
     render() {
-      console.log(this.state.recipeArray)
+      // console.log(this.state.recipeArray)
     return (
     
         <div className="container">
