@@ -26,7 +26,7 @@ export class Nav extends Component {
       <nav className="Navbar">
         <div className="h1-logo">
           <h1>
-            <Link to="/">Cooking with friends!</Link>
+            <Link to="/">Return to HomePage</Link>
           </h1>
         </div>
         <div className="right-side-nav">
